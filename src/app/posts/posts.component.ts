@@ -23,7 +23,7 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     console.group('PostsComponent');
     console.log('PostsComponent');
-    this.dataProvider.fetch();
+    // this.dataProvider.fetch();
     console.groupEnd();
   }
 }

@@ -10,7 +10,7 @@ export interface IDataProvider {
    * (async) Request to rest api server
    * -> data ? POST: GET
    */
-  sendRequest(key: string, data: any, useETag: boolean): void;
+  sendRequest(o: {key: string, data: any, useETag: boolean}): void;
 
   /**
    * Get data stream from store / service / behavior subject

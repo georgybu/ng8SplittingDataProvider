@@ -7,8 +7,16 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class DataProviderService implements IDataProvider {
 
-  constructor(@Inject(DataProviderConfig) private config) {
+  constructor(@Inject(DataProviderConfig) private config, private http: HttpClient) {
     console.log('DataProviderService', this.config);
+
+    this.config.forEach(c => {
+      if (c.api) {
+        const service = new c.api(http);
+        console.log(service);
+        service.getUsers().subscribe();
+      }
+    });
   }
 
   clearStore(key: string): void {
@@ -18,13 +26,16 @@ export class DataProviderService implements IDataProvider {
     return undefined;
   }
 
-  sendRequest(key: string, data: any, useETag: boolean): void {
-    console.log(this.config);
+  sendRequest(o: { key: string; data: any; useETag: boolean }): void {
   }
 
-  fetch() {
-    console.log(this.config.url);
-    // return this.http.get(this.config.url);
-  }
+  // sendRequest(key: string, data: any, useETag: boolean): void {
+  //   console.log(this.config);
+  // }
+
+  // fetch() {
+  //   console.log(this.config);
+  //   // return this.http.get(this.config.url);
+  // }
 
 }

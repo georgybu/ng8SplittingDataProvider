@@ -3,7 +3,11 @@ import {DataProviderService} from './data-provider.service';
 import {DataProviderConfig} from './data-provider.token';
 import {HttpClientModule} from '@angular/common/http';
 
-@NgModule()
+@NgModule({
+  imports: [
+    HttpClientModule
+  ]
+})
 export class DataProviderModule {
   static forFeature(config: any): ModuleWithProviders {
     return {
@@ -12,6 +16,7 @@ export class DataProviderModule {
         DataProviderService,
         {
           provide: DataProviderConfig,
+          multi: true,
           useValue: config,
         },
       ]
