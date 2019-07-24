@@ -8,6 +8,19 @@
 
 
 ## IDataProvider Inrterface
+```typescript
+interface IDataProvider {
+  sendRequest(o: IDataProviderRequest): void;
+  getFromStore<T>(key: string): Observable<T>;
+  clearStore(key: string): void;
+}
+
+interface IDataProviderRequest {
+  key: string;
+  data?: any;
+  useETag?: boolean;
+}
+```
 
 ## About
 
