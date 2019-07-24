@@ -1,4 +1,15 @@
-# Ng8moduleWithConfig
+# Solution for angular module separation for large apps with multiple store implementation
+
+## Each module has api manager that should implement IDataProvider
+![DataProviderFacade](docs/DataProviderFacade.png?raw=true 'DataProviderFacade')
+
+## App structure and implementation example
+![AppSctructure](docs/AppSctructure.png?raw=true 'AppSctructure')
+
+
+## IDataProvider Inrterface
+
+## About
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.4.
 

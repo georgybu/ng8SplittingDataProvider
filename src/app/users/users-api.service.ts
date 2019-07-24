@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SimpleStore} from '../data-provider/simple.store';
 import {EMPTY, Observable} from 'rxjs';
-import {httpStoreEffect} from '../data-provider/httpEffect';
+import {httpSimpleStoreEffect} from '../data-provider/httpEffect';
 import {IAsyncResult} from '../data-provider/IAsyncResult.interface';
 import {IDataProvider} from '../data-provider/data-provider.interface';
 
@@ -43,7 +43,7 @@ export class UsersApiService implements IDataProvider {
       case 'users':
         const url = 'https://jsonplaceholder.typicode.com/users';
         this.store.setState({users: {loading: true, data: null, error: null}});
-        this.http.get(url).pipe(httpStoreEffect(this.store, 'users')).subscribe();
+        this.http.get(url).pipe(httpSimpleStoreEffect(this.store, 'users')).subscribe();
         break;
     }
   }

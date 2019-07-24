@@ -7,6 +7,10 @@ import {PostsModule} from './posts/posts.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DataProviderModule} from './data-provider/data-provider.module';
 import {AppApiService} from './app-api.service';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {reducers} from './store';
+import {HttpEffects} from './store/http.effects';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,9 @@ import {AppApiService} from './app-api.service';
     UsersModule,
     PostsModule,
     HttpClientModule,
-    DataProviderModule.forRoot(AppApiService)
+    DataProviderModule.forRoot(AppApiService),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([HttpEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,7 +2,7 @@ import {SimpleStore} from './simple.store';
 import {pipe, Subject, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
-export const httpStoreEffect = (store: SimpleStore, dataKey = 'unknown', effectFn: (r: any) => any = null) => {
+export const httpSimpleStoreEffect = (store: SimpleStore, dataKey = 'unknown', effectFn: (r: any) => any = null) => {
   return pipe(
     map(result => {
       const data = effectFn ? effectFn(result) : result;
