@@ -1,29 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataProviderService} from '../data-provider/data-provider.service';
-import {MyService} from '../my-service/my-service.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'm-posts',
   template: `
     <p>
-      posts works!
+      posts:
     </p>
+    <ul *ngIf="posts$ | async as posts">
+      <li *ngFor="let post of posts.data">
+        <pre>{{ post.title }}</pre>
+      </li>
+    </ul>
   `,
   styles: []
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
+  public posts$: Observable<any>;
 
-  constructor(private dataProvider: DataProviderService, myService: MyService) {
-    console.group('PostsComponent Constructor');
-    console.log('myService injectable');
-    console.log(JSON.stringify(myService));
-    console.groupEnd();
+  constructor(private dataProvider: DataProviderService) {
+    this.posts$ = this.dataProvider.getFromStore('posts');
   }
 
   ngOnInit() {
-    console.group('PostsComponent');
-    console.log('PostsComponent');
-    // this.dataProvider.fetch();
-    console.groupEnd();
+    this.dataProvider.sendRequest({key: 'posts'});
+  }
+
+  ngOnDestroy(): void {
+    this.dataProvider.clearStore('posts');
   }
 }

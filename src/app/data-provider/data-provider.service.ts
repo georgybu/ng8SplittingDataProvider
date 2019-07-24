@@ -1,41 +1,25 @@
-import {Inject, Injectable} from '@angular/core';
-import {DataProviderConfig} from './data-provider.token';
+import {Injectable} from '@angular/core';
 import {IDataProvider} from './data-provider.interface';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {EMPTY, merge, Observable} from 'rxjs';
+import {IDataProviderRequest} from './IDataProvider.request';
 
 @Injectable()
 export class DataProviderService implements IDataProvider {
+  private apiServices: IDataProvider[] = [];
 
-  constructor(@Inject(DataProviderConfig) private config, private http: HttpClient) {
-    console.log('DataProviderService', this.config);
-
-    this.config.forEach(c => {
-      if (c.api) {
-        const service = new c.api(http);
-        console.log(service);
-        service.getUsers().subscribe();
-      }
-    });
+  addApi(api) {
+    this.apiServices.push(api);
   }
 
   clearStore(key: string): void {
+    this.apiServices.forEach((api) => api.clearStore ? api.clearStore(key) : null);
   }
 
   getFromStore<T>(key: string): Observable<T> {
-    return undefined;
+    return merge(...this.apiServices.map(api => api.getFromStore ? api.getFromStore<T>(key) : EMPTY));
   }
 
-  sendRequest(o: { key: string; data: any; useETag: boolean }): void {
+  sendRequest(o: IDataProviderRequest): void {
+    this.apiServices.forEach((api) => api.sendRequest ? api.sendRequest(o) : null);
   }
-
-  // sendRequest(key: string, data: any, useETag: boolean): void {
-  //   console.log(this.config);
-  // }
-
-  // fetch() {
-  //   console.log(this.config);
-  //   // return this.http.get(this.config.url);
-  // }
-
 }

@@ -1,16 +1,13 @@
 import {Observable} from 'rxjs';
+import {IDataProviderRequest} from './IDataProvider.request';
 
-/**
- * This is example of DataProvider interface.
- * Don't relevant for `.forRoot`
- */
 export interface IDataProvider {
 
   /**
    * (async) Request to rest api server
    * -> data ? POST: GET
    */
-  sendRequest(o: {key: string, data: any, useETag: boolean}): void;
+  sendRequest(o: IDataProviderRequest): void;
 
   /**
    * Get data stream from store / service / behavior subject

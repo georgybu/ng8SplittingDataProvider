@@ -1,4 +1,7 @@
-import {InjectionToken} from '@angular/core';
+import {InjectionToken, Type} from '@angular/core';
 
-// TODO: declare interface instead of `any`
-export const DataProviderConfig = new InjectionToken<any>('Data Provider Config Token');
+export const DATA_PROVIDER_CONFIG = new InjectionToken<any>('Data Provider: Config Token');
+
+export const DATA_PROVIDER_ROOT_APIS = new InjectionToken<Type<any>>('Data Provider: Root Apis');
+
+export const DATA_PROVIDER_FEATURE_APIS = new InjectionToken<Type<any>>('Data Provider: Feature Apis');

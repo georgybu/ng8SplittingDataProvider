@@ -4,7 +4,9 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {UsersModule} from './users/users.module';
 import {PostsModule} from './posts/posts.module';
-import {MyServiceModule} from './my-service/my-service.module';
+import {HttpClientModule} from '@angular/common/http';
+import {DataProviderModule} from './data-provider/data-provider.module';
+import {AppApiService} from './app-api.service';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,8 @@ import {MyServiceModule} from './my-service/my-service.module';
     BrowserModule,
     UsersModule,
     PostsModule,
-    MyServiceModule.forRoot({
-      retryInterval: 9999,
-      retryCount: 35
-    })
+    HttpClientModule,
+    DataProviderModule.forRoot(AppApiService)
   ],
   providers: [],
   bootstrap: [AppComponent]
