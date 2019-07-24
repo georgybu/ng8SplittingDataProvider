@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {PostsComponent} from './posts.component';
 import {DataProviderModule} from '../data-provider/data-provider.module';
 import {HttpClientModule} from '@angular/common/http';
-import {UsersApiService} from '../users/users-api.service';
+import {PostsApiService} from './posts-api.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import {UsersApiService} from '../users/users-api.service';
   imports: [
     CommonModule,
     HttpClientModule,
-    DataProviderModule.forFeature(UsersApiService)
+    DataProviderModule.forFeature(PostsApiService)
   ]
 })
 export class PostsModule {
