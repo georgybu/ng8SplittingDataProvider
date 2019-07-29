@@ -22,14 +22,10 @@ export class SimpleStore<StateType = any> {
   }
 
   public select<K extends keyof StateType>(key: K): Observable<StateType[K]> {
-    const selectStream = this.stateSubject.pipe(
-      map((state: StateType) => {
-        return state[key];
-      }),
+    return this.stateSubject.pipe(
+      map((state: StateType) => state[key]),
       distinctUntilChanged()
     );
-
-    return selectStream;
   }
 
   public setState(partialState: Partial<StateType>): void {

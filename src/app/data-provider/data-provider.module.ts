@@ -15,6 +15,7 @@ export class DataProviderModule {
     return {
       ngModule: DataProviderRootModule,
       providers: [
+        DataProviderService,
         api,
         {
           provide: DATA_PROVIDER_ROOT_APIS,
